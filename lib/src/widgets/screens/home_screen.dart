@@ -7,6 +7,8 @@ import 'package:path_provider/path_provider.dart';
 
 import 'package:sensors_plus/sensors_plus.dart';
 
+/// A simple Flutter app that logs accelerometer data to a CSV file
+/// and displays it in a list view.
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
   final String title;
@@ -16,11 +18,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  /// The accelerometer event stream subscription.
   late final StreamSubscription<AccelerometerEvent> _subscription;
 
+  ///  The flag to indicate whether the service is paused.
   bool _isPaused = false;
+
+  /// The accelerometer data string.
   String _accelData = "";
+
+  /// The logs string.
   String _logs = "";
+
+  /// The log file.
   File? _logFile;
 
   @override
@@ -33,6 +43,7 @@ class _HomePageState extends State<HomePage> {
     startLogging();
   }
 
+  /// Starts logging accelerometer data to a CSV file.
   Future<void> startLogging() async {
     final directory = await getApplicationDocumentsDirectory();
     final filePath = '${directory.path}/accelerometer_log.csv';
@@ -52,6 +63,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  /// Parses the log file and returns a list of strings.
   List<String> get _parseLogFile {
     if (_logs.isEmpty) {
       return [];
@@ -59,6 +71,7 @@ class _HomePageState extends State<HomePage> {
     return _logs.split('\n');
   }
 
+  /// Starts or resumes the foreground service.
   Future<void> _startService() async {
     if (_isPaused) {
       _subscription.resume();
@@ -69,6 +82,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  /// Reads the log file and updates the logs string.
   Future<void> _readLogs() async {
     final file = File(_logFile?.path ?? '');
     if (await file.exists()) {

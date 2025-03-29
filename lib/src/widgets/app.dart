@@ -1,6 +1,7 @@
 import 'package:axilerometer_interview_app/src/widgets/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
+/// The main entry point of the app.
 class App extends StatelessWidget {
   const App({super.key});
 
