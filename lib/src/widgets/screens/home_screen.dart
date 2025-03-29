@@ -124,10 +124,35 @@ class _HomePageState extends State<HomePage> {
                     _logs.isEmpty
                         ? Text("No logs yet.")
                         : ListView.builder(
-                          itemCount: _parseLogFile.length,
+                          itemCount: _parseLogFile.length - 1,
                           itemBuilder: (BuildContext context, int index) {
                             final log = _parseLogFile[index];
-                            return Text(log);
+                            return Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.grey,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.shade500,
+                                    spreadRadius: 1,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 16.0,
+                              ),
+                              margin: const EdgeInsets.only(bottom: 8.0),
+                              alignment: Alignment.centerLeft,
+                              child: Text(log),
+                            );
                           },
                         ),
               ),
