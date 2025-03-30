@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
               ElevatedButton(
                 onPressed: _startService,
                 child: Text(
-                  "${_isPaused ? "Resume" : "Start"} Foreground Service",
+                  "${_isPaused ? "Resume" : "Pause"} Foreground Service",
                 ),
               ),
               ElevatedButton(onPressed: _readLogs, child: Text('Read Logs')),
